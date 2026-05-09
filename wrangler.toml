@@ -1,6 +1,5 @@
 name = "lighthouse-studio"
 compatibility_date = "2024-01-01"
-account_id = "c0dd4661f3e8ce2111d24a04dd03d021"
 pages_build_output_dir = ".next"
 
 [[d1_databases]]
