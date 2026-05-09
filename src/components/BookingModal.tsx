@@ -203,7 +203,13 @@ export const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) =
                           <label className="text-xs font-bold uppercase tracking-widest text-[#64748B]">Select Date</label>
                           <input 
                             type="date" 
-                            className="w-full bg-[#12171E] border border-[#222B38] rounded-xl p-4 text-white outline-none focus:border-[#EAB308] transition-colors"
+                            className="w-full bg-[#12171E] border border-[#222B38] rounded-xl p-4 text-white outline-none focus:border-[#EAB308] transition-colors [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer relative"
+                            onClick={(e) => {
+                              try { e.currentTarget.showPicker(); } catch(err) {}
+                            }}
+                            onFocus={(e) => {
+                              try { e.currentTarget.showPicker(); } catch(err) {}
+                            }}
                             onChange={(e) => setSelectedDate(e.target.value)}
                           />
                         </div>
