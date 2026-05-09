@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Lighthouse Studios</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="admin-body">
+
+  <!-- ═══════════════════ LOGIN OVERLAY ═══════════════════ -->
+  <div id="login-overlay" class="login-overlay">
+    <div class="login-box">
+      <div class="login-logo">
+        <span class="login-logo-icon">⬡</span>
+        <span>Lighthouse Studios</span>
+      </div>
+      <h2 class="login-title">Admin Access</h2>
+      <p class="login-sub">Sign in to manage your studio</p>
+      <form id="login-form" autocomplete="off">
+        <div class="field-group">
+          <label class="field-label" for="login-user">Username</label>
+          <input class="field-input" id="login-user" type="text" placeholder="admin" autocomplete="username" />
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="login-pass">Password</label>
+          <div class="pass-wrap">
+            <input class="field-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password" />
+            <button type="button" class="pass-toggle" id="pass-toggle" aria-label="Toggle password">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <p class="login-error" id="login-error"></p>
+        <button class="btn-primary btn-full" type="submit">Sign In</button>
+      </form>
+      <p class="login-footer">Lighthouse Studios By Brainvare &copy; 2026</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ADMIN SHELL ═══════════════════ -->
+  <div id="admin-shell" class="admin-shell" style="display:none">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <span class="sidebar-brand-icon">⬡</span>
+          <div class="sidebar-brand-text">
+            <span class="sidebar-brand-name">Lighthouse</span>
+            <span class="sidebar-brand-sub">Studios Admin</span>
+          </div>
+        </div>
+        <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+
+        <div class="nav-section">
+          <p class="nav-section-label">Bookings</p>
+          <a class="nav-item active" data-page="overview" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Overview
+          </a>
+          <a class="nav-item" data-page="bookings" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+            All Bookings
+            <span class="nav-badge" id="nav-badge-bookings"></span>
+          </a>
+          <a class="nav-item" data-page="create-booking" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+            Create Booking
+          </a>
+          <a class="nav-item" data-page="calendar" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Calendar
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-label">Customers</p>
+          <a class="nav-item" data-page="customers" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Customer List
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-label">Finance</p>
+          <a class="nav-item" data-page="payments" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Payments
+          </a>
+          <a class="nav-item" data-page="coupons" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+            Coupons &amp; Discounts
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-label">Studio Setup</p>
+          <a class="nav-item" data-page="services" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Services
+          </a>
+          <a class="nav-item" data-page="packages" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            Package Builder
+          </a>
+          <a class="nav-item" data-page="addons" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add-Ons
+          </a>
+          <a class="nav-item" data-page="tariffs" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Tariffs
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-label">Content</p>
+          <a class="nav-item" data-page="terms" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Terms &amp; Conditions
+          </a>
+          <a class="nav-item" data-page="templates" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            WhatsApp Templates
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <p class="nav-section-label">System</p>
+          <a class="nav-item" data-page="users" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Users &amp; Roles
+          </a>
+          <a class="nav-item" data-page="reports" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Reports
+          </a>
+          <a class="nav-item" data-page="settings" href="#">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            Settings
+          </a>
+        </div>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="sidebar-footer-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Website
+        </a>
+        <button class="sidebar-footer-btn" id="logout-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="admin-main" id="admin-main">
+
+      <!-- TOPBAR -->
+      <header class="topbar">
+        <button class="topbar-menu" id="topbar-menu" aria-label="Toggle menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="topbar-breadcrumb">
+          <span class="topbar-studio">Lighthouse Studios</span>
+          <span class="topbar-sep">/</span>
+          <span class="topbar-page" id="topbar-page">Overview</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="topbar-action-btn" id="topbar-wa-btn" title="Open WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </button>
+          <div class="topbar-user">
+            <div class="topbar-avatar" id="topbar-avatar">A</div>
+            <span class="topbar-username" id="topbar-username">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT -->
+      <main class="page-content" id="page-content">
+        <!-- Rendered by admin.js -->
+      </main>
+
+    </div><!-- /.admin-main -->
+
+    <!-- SIDEBAR OVERLAY (mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  </div><!-- /#admin-shell -->
+
+  <!-- ═══════════════════ BOOKING DETAIL MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="booking-detail-backdrop" style="display:none" role="dialog" aria-modal="true" aria-labelledby="bd-modal-title">
+    <div class="modal modal-xl" id="booking-detail-modal">
+
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <h2 class="modal-title" id="bd-modal-title">Booking Detail</h2>
+          <span class="booking-id-pill" id="bd-booking-id"></span>
+          <span class="status-pill" id="bd-status-pill"></span>
+        </div>
+        <div class="modal-header-right">
+          <button class="modal-action-btn" id="bd-wa-btn" title="WhatsApp customer">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </button>
+          <button class="modal-action-btn" id="bd-receipt-btn" title="Open customer receipt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </button>
+          <button class="modal-close" id="bd-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="overview">Overview</button>
+        <button class="modal-tab" data-tab="lineitems">Line Items</button>
+        <button class="modal-tab" data-tab="notes">Notes &amp; History</button>
+        <button class="modal-tab" data-tab="deliverables">Deliverables</button>
+        <button class="modal-tab" data-tab="qrcomms">QR &amp; Comms</button>
+      </div>
+
+      <!-- TAB BODY -->
+      <div class="modal-body" id="bd-tab-body">
+        <!-- rendered by admin.js per-tab -->
+      </div>
+
+      <!-- MODAL FOOTER -->
+      <div class="modal-footer">
+        <div class="modal-footer-left">
+          <label class="field-label-sm">Status</label>
+          <select class="select-sm" id="bd-status-select"></select>
+          <label class="field-label-sm">Payment</label>
+          <select class="select-sm" id="bd-payment-select"></select>
+          <label class="field-label-sm">Delivery</label>
+          <select class="select-sm" id="bd-delivery-select"></select>
+        </div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="bd-cancel-booking-btn">Cancel Booking</button>
+          <button class="btn-primary" id="bd-save-btn">Save Changes</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════ CREATE / EDIT CUSTOMER MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="customer-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="customer-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="customer-modal-title">Add Customer</h2>
+        <button class="modal-close" id="customer-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="customer-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cf-name">Full Name *</label>
+              <input class="field-input" id="cf-name" type="text" placeholder="e.g. Rahul Sharma" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cf-email">Email</label>
+              <input class="field-input" id="cf-email" type="email" placeholder="email@example.com" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cf-phone">Phone *</label>
+              <input class="field-input" id="cf-phone" type="tel" placeholder="+91 98765 43210" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cf-type">Customer Type</label>
+              <select class="field-input" id="cf-type">
+                <option value="individual">Individual</option>
+                <option value="business">Business</option>
+                <option value="agency">Agency</option>
+                <option value="vip">VIP</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="cf-company">Company / Brand</label>
+            <input class="field-input" id="cf-company" type="text" placeholder="Optional" />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="cf-notes">Internal Notes</label>
+            <textarea class="field-input" id="cf-notes" rows="3" placeholder="Any internal notes about this customer…"></textarea>
+          </div>
+          <input type="hidden" id="cf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="customer-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="customer-modal-save">Save Customer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ PACKAGE BUILDER MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="package-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="package-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="package-modal-title">New Package</h2>
+        <button class="modal-close" id="package-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="package-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="pf-name">Package Name *</label>
+              <input class="field-input" id="pf-name" type="text" placeholder="e.g. 2 Camera Setup" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="pf-service">Service</label>
+              <select class="field-input" id="pf-service"></select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="pf-desc">Description</label>
+            <textarea class="field-input" id="pf-desc" rows="2" placeholder="What's included in this package…"></textarea>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="pf-price-hr">1st Hour (₹)</label>
+              <input class="field-input" id="pf-price-hr" type="number" min="0" step="50" placeholder="0" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="pf-price-half">Each Extra Hour (₹)</label>
+              <input class="field-input" id="pf-price-half" type="number" min="0" step="50" placeholder="0" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="pf-min-hrs">Min Hours</label>
+              <input class="field-input" id="pf-min-hrs" type="number" min="1" max="24" value="2" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="pf-max-guests">Max Guests</label>
+              <input class="field-input" id="pf-max-guests" type="number" min="1" value="10" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="pf-includes">Includes (comma-separated)</label>
+            <input class="field-input" id="pf-includes" type="text" placeholder="e.g. 2 cameras, audio mixing, lighting" />
+          </div>
+          <div class="field-group field-group-row">
+            <label class="field-label" for="pf-active">Active</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="pf-active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <input type="hidden" id="pf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="package-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="package-modal-save">Save Package</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ SERVICE MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="service-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="service-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="service-modal-title">New Service</h2>
+        <button class="modal-close" id="service-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="service-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="sf-name">Service Name *</label>
+              <input class="field-input" id="sf-name" type="text" placeholder="e.g. Podcast Recording" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="sf-icon">Icon (emoji)</label>
+              <input class="field-input" id="sf-icon" type="text" placeholder="🎙️" maxlength="4" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="sf-desc">Description</label>
+            <textarea class="field-input" id="sf-desc" rows="2" placeholder="Short service description…"></textarea>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="sf-base-price">Base Price / hr (₹)</label>
+              <input class="field-input" id="sf-base-price" type="number" min="0" step="50" value="0" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="sf-color">Accent Color</label>
+              <input class="field-input" id="sf-color" type="color" value="#D6A84F" />
+            </div>
+          </div>
+          <div class="field-group field-group-row">
+            <label class="field-label" for="sf-active">Active</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="sf-active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <input type="hidden" id="sf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="service-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="service-modal-save">Save Service</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ADD-ON MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="addon-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="addon-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="addon-modal-title">New Add-On</h2>
+        <button class="modal-close" id="addon-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="addon-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="af-name">Add-On Name *</label>
+              <input class="field-input" id="af-name" type="text" placeholder="e.g. Professional Makeup" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="af-icon">Icon (emoji)</label>
+              <input class="field-input" id="af-icon" type="text" placeholder="💄" maxlength="4" />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="af-desc">Description</label>
+            <input class="field-input" id="af-desc" type="text" placeholder="Short description…" />
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="af-price">Price (₹) *</label>
+              <input class="field-input" id="af-price" type="number" min="0" step="50" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="af-unit">Unit</label>
+              <select class="field-input" id="af-unit">
+                <option value="flat">Flat fee</option>
+                <option value="per-hour">Per hour</option>
+                <option value="per-person">Per person</option>
+                <option value="per-session">Per session</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="af-max-qty">Max Qty</label>
+              <input class="field-input" id="af-max-qty" type="number" min="1" value="5" />
+            </div>
+            <div class="field-group field-group-row">
+              <label class="field-label" for="af-active">Active</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="af-active" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+          <input type="hidden" id="af-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="addon-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="addon-modal-save">Save Add-On</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TARIFF MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="tariff-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="tariff-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="tariff-modal-title">New Tariff Rule</h2>
+        <button class="modal-close" id="tariff-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="tariff-form">
+          <div class="field-group">
+            <label class="field-label" for="tf-name">Rule Name *</label>
+            <input class="field-input" id="tf-name" type="text" placeholder="e.g. After-hours surcharge" required />
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="tf-type">Surcharge Type</label>
+              <select class="field-input" id="tf-type">
+                <option value="percent">Percentage (%)</option>
+                <option value="fixed-per-hour">Fixed per hour (₹/hr)</option>
+                <option value="fixed-flat">Fixed flat amount (₹)</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="tf-amount">Amount</label>
+              <input class="field-input" id="tf-amount" type="number" min="0" step="1" placeholder="e.g. 20" />
+            </div>
+          </div>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Time Range (optional)</legend>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label" for="tf-start-hr">Start Hour (0–23)</label>
+                <input class="field-input" id="tf-start-hr" type="number" min="0" max="23" placeholder="e.g. 20" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="tf-end-hr">End Hour (0–23)</label>
+                <input class="field-input" id="tf-end-hr" type="number" min="0" max="23" placeholder="e.g. 23" />
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Days of Week (optional)</legend>
+            <div class="days-grid" id="tf-days-grid">
+              <label class="day-check"><input type="checkbox" name="tf-day" value="0" /> Sun</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="1" /> Mon</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="2" /> Tue</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="3" /> Wed</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="4" /> Thu</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="5" /> Fri</label>
+              <label class="day-check"><input type="checkbox" name="tf-day" value="6" /> Sat</label>
+            </div>
+          </fieldset>
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Date Range (optional)</legend>
+            <div class="form-grid-2">
+              <div class="field-group">
+                <label class="field-label" for="tf-date-from">From</label>
+                <input class="field-input" id="tf-date-from" type="date" />
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="tf-date-to">To</label>
+                <input class="field-input" id="tf-date-to" type="date" />
+              </div>
+            </div>
+          </fieldset>
+          <div class="field-group field-group-row">
+            <label class="field-label" for="tf-active">Active</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="tf-active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <input type="hidden" id="tf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="tariff-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="tariff-modal-save">Save Rule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ COUPON MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="coupon-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="coupon-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="coupon-modal-title">New Coupon</h2>
+        <button class="modal-close" id="coupon-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="coupon-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cpf-code">Coupon Code *</label>
+              <div class="input-addon-wrap">
+                <input class="field-input" id="cpf-code" type="text" placeholder="e.g. LAUNCH20" required style="text-transform:uppercase" />
+                <button type="button" class="input-addon-btn" id="cpf-generate">Generate</button>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cpf-type">Discount Type</label>
+              <select class="field-input" id="cpf-type">
+                <option value="percent">Percentage (%)</option>
+                <option value="fixed">Fixed Amount (₹)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cpf-value">Discount Value *</label>
+              <input class="field-input" id="cpf-value" type="number" min="0" step="1" placeholder="e.g. 20" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cpf-max-discount">Max Discount (₹)</label>
+              <input class="field-input" id="cpf-max-discount" type="number" min="0" placeholder="No cap" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cpf-min-amount">Min Booking Amount (₹)</label>
+              <input class="field-input" id="cpf-min-amount" type="number" min="0" placeholder="0" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cpf-usage-limit">Usage Limit</label>
+              <input class="field-input" id="cpf-usage-limit" type="number" min="1" placeholder="Unlimited" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="cpf-expiry">Expiry Date</label>
+              <input class="field-input" id="cpf-expiry" type="date" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="cpf-service">Restrict to Service</label>
+              <select class="field-input" id="cpf-service">
+                <option value="">All Services</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="cpf-desc">Internal Note</label>
+            <input class="field-input" id="cpf-desc" type="text" placeholder="e.g. Launch promo — Instagram campaign" />
+          </div>
+          <div class="field-group field-group-row">
+            <label class="field-label" for="cpf-active">Active</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="cpf-active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <input type="hidden" id="cpf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="coupon-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="coupon-modal-save">Save Coupon</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ USER MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="user-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="user-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="user-modal-title">New User</h2>
+        <button class="modal-close" id="user-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="user-form">
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="uf-name">Full Name *</label>
+              <input class="field-input" id="uf-name" type="text" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="uf-username">Username *</label>
+              <input class="field-input" id="uf-username" type="text" required />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="uf-password">Password *</label>
+              <input class="field-input" id="uf-password" type="password" placeholder="Min 8 characters" />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="uf-role">Role</label>
+              <select class="field-input" id="uf-role">
+                <option value="superadmin">Super Admin</option>
+                <option value="manager">Manager</option>
+                <option value="staff">Staff</option>
+                <option value="finance">Finance Only</option>
+                <option value="readonly">Read Only</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="uf-email">Email</label>
+            <input class="field-input" id="uf-email" type="email" />
+          </div>
+          <div class="field-group field-group-row">
+            <label class="field-label" for="uf-active">Active</label>
+            <label class="toggle-switch">
+              <input type="checkbox" id="uf-active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <input type="hidden" id="uf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="user-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="user-modal-save">Save User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TEMPLATE MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="template-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-md" id="template-modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="template-modal-title">Edit Template</h2>
+        <button class="modal-close" id="template-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="hint-text">Placeholders: <code>{name}</code> <code>{bookingId}</code> <code>{date}</code> <code>{time}</code> <code>{service}</code> <code>{package}</code> <code>{amount}</code> <code>{status}</code></p>
+        <form id="template-form">
+          <div class="field-group">
+            <label class="field-label" for="tmf-name">Template Name</label>
+            <input class="field-input" id="tmf-name" type="text" readonly />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="tmf-body">Message Body *</label>
+            <textarea class="field-input font-mono" id="tmf-body" rows="8" required></textarea>
+          </div>
+          <input type="hidden" id="tmf-id" />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="template-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="template-modal-save">Save Template</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ADD LINE ITEM MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="lineitem-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="lineitem-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Add Line Item</h2>
+        <button class="modal-close" id="lineitem-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="lineitem-form">
+          <div class="field-group">
+            <label class="field-label" for="li-name">Item Name *</label>
+            <input class="field-input" id="li-name" type="text" placeholder="e.g. Extra setup time" required />
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="li-price">Amount (₹) *</label>
+              <input class="field-input" id="li-price" type="number" step="50" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="li-type">Type</label>
+              <select class="field-input" id="li-type">
+                <option value="charge">Additional Charge</option>
+                <option value="discount">Discount / Credit</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="li-note">Note</label>
+            <input class="field-input" id="li-note" type="text" placeholder="Optional reason" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="lineitem-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="lineitem-modal-save">Add Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ADD DRIVE LINK MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="drive-modal-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="drive-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Add Drive Link</h2>
+        <button class="modal-close" id="drive-modal-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="drive-form">
+          <div class="field-group">
+            <label class="field-label" for="df-label">Label *</label>
+            <input class="field-input" id="df-label" type="text" placeholder="e.g. Raw Footage — Episode 12" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="df-url">Google Drive / Link URL *</label>
+            <input class="field-input" id="df-url" type="url" placeholder="https://drive.google.com/…" required />
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="df-type">Type</label>
+            <select class="field-input" id="df-type">
+              <option value="raw-footage">Raw Footage</option>
+              <option value="edited">Edited Video</option>
+              <option value="photos">Photos</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="drive-modal-cancel">Cancel</button>
+          <button class="btn-primary" id="drive-modal-save">Add Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ BLOCK SLOT MODAL ═══════════════════ -->
+  <div class="modal-backdrop" id="block-slot-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="block-slot-modal">
+      <div class="modal-header">
+        <h2 class="modal-title">Block Time Slot</h2>
+        <button class="modal-close" id="block-slot-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="block-slot-form">
+          <div class="field-group">
+            <label class="field-label" for="bs-date">Date *</label>
+            <input class="field-input" id="bs-date" type="date" required />
+          </div>
+          <div class="form-grid-2">
+            <div class="field-group">
+              <label class="field-label" for="bs-start">Start Time *</label>
+              <input class="field-input" id="bs-start" type="time" required />
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="bs-end">End Time *</label>
+              <input class="field-input" id="bs-end" type="time" required />
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="bs-reason">Reason</label>
+            <input class="field-input" id="bs-reason" type="text" placeholder="e.g. Studio maintenance" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div></div>
+        <div class="modal-footer-right">
+          <button class="btn-ghost" id="block-slot-cancel">Cancel</button>
+          <button class="btn-primary" id="block-slot-save">Block Slot</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ CONFIRM DIALOG ═══════════════════ -->
+  <div class="modal-backdrop" id="confirm-backdrop" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal modal-sm" id="confirm-modal">
+      <div class="modal-body" style="padding:2rem">
+        <p class="confirm-title" id="confirm-title">Are you sure?</p>
+        <p class="confirm-body" id="confirm-body"></p>
+        <div class="confirm-actions">
+          <button class="btn-ghost" id="confirm-no">Cancel</button>
+          <button class="btn-danger" id="confirm-yes">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TOAST ═══════════════════ -->
+  <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  <!-- SCRIPTS -->
+  <script src="data.js"></script>
+  <script src="admin.js"></script>
+
+</body>
+</html>

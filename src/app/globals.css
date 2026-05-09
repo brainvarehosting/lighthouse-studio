@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@theme {
+  --font-head: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+:root {
+  --bg: #05070A;
+  --bg-2: #0B0F14;
+  --card: #12171E;
+  --card-2: #191F29;
+  --border: #222B38;
+  --border-2: #2D394D;
+  --text: #F8FAFC;
+  --text-2: #CBD5E1;
+  --muted: #64748B;
+  --gold: #EAB308;
+  --gold-2: #CA8A04;
+  --gold-light: #FDE047;
+  --gold-dim: rgba(234, 179, 8, 0.1);
+  --gold-grad: linear-gradient(135deg, #EAB308 0%, #CA8A04 100%);
+  --gold-grad-h: linear-gradient(135deg, #FDE047 0%, #EAB308 100%);
+  --wa: #22C55E;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.7);
+  --glow: 0 0 50px rgba(234, 179, 8, 0.15);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --nav-h: 72px;
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--bg)] text-[var(--text)] antialiased overflow-x-hidden;
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+    font-family: var(--font-head);
+  }
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[var(--radius-sm)] font-semibold transition-all duration-300;
+    background: var(--gold-grad);
+    color: #05070A;
+    box-shadow: 0 4px 20px rgba(234, 179, 8, 0.3);
+  }
+  
+  .btn-gold:hover {
+    @apply -translate-y-0.5;
+    background: var(--gold-grad-h);
+    box-shadow: 0 8px 32px rgba(234, 179, 8, 0.4);
+  }
+
+  .premium-card {
+    @apply bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius-lg)] p-8 transition-all duration-300 relative overflow-hidden;
+  }
+
+  .premium-card:hover {
+    @apply -translate-y-2 border-[rgba(234,179,8,0.4)];
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(234, 179, 8, 0.05);
+  }
+
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+}

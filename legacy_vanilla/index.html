@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lighthouse Studios By Brainvare — Premium podcast studio, product shoots, video production, live events & full media production. Book your session online." />
+    <meta name="keywords" content="podcast studio booking, video production studio, product photoshoot studio, live streaming studio, Lighthouse Studios" />
+    <meta name="author" content="Lighthouse Studios By Brainvare" />
+    <meta name="theme-color" content="#0B0F14" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Lighthouse Studios By Brainvare — Book Your Session" />
+    <meta property="og:description" content="Premium podcast studio, product shoots, video production & live events. Book online, instant pricing." />
+    <meta property="og:site_name" content="Lighthouse Studios By Brainvare" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Lighthouse Studios By Brainvare — Book Your Session" />
+    <meta name="twitter:description" content="Premium podcast studio, product shoots, video production & live events." />
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
+    <title>Lighthouse Studios — Premium Production Space</title>
+    <!-- Advanced Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Lighthouse Studios By Brainvare",
+      "image": "https://your-studio.pages.dev/assets/logo.png",
+      "@id": "https://your-studio.pages.dev/",
+      "url": "https://your-studio.pages.dev/",
+      "telephone": "+910000000000",
+      "priceRange": "₹2500 - ₹25000",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Studio Street",
+        "addressLocality": "Your City",
+        "postalCode": "000000",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 0.0000,
+        "longitude": 0.0000
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "09:00",
+        "closes": "21:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/yourstudio",
+        "https://www.instagram.com/yourstudio",
+        "https://www.youtube.com/yourstudio"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "Podcast Production",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Lighthouse Studios"
+      },
+      "areaServed": "Your City",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Production Packages",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1 Camera Podcast Session"
+            },
+            "price": "2500",
+            "priceCurrency": "INR"
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "2 Camera Podcast Session"
+            },
+            "price": "4500",
+            "priceCurrency": "INR"
+          }
+        ]
+      }
+    }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">
+            <div class="logo-mark">
+                <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
+                    <circle cx="17" cy="17" r="15" stroke="url(#lg1)" stroke-width="2"/>
+                    <path d="M17 7 L17 27 M12 12 L17 7 L22 12" stroke="url(#lg1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="17" cy="22" r="3" fill="url(#lg1)" opacity="0.8"/>
+                    <defs>
+                        <linearGradient id="lg1" x1="0" y1="0" x2="34" y2="34">
+                            <stop offset="0%" stop-color="#D6A84F"/>
+                            <stop offset="100%" stop-color="#C9A227"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="logo-text-wrap">
+                <span class="logo-name">Lighthouse <span class="logo-accent">Studios</span></span>
+                <span class="logo-by">By Brainvare</span>
+            </div>
+        </a>
+        <div class="nav-links" id="nav-links">
+            <a href="#services" class="nav-link">Services</a>
+            <a href="#packages" class="nav-link">Packages</a>
+            <a href="#pricing" class="nav-link">Pricing</a>
+            <div id="user-button"></div>
+            <a href="#booking" class="btn btn-gold nav-cta reveal">Book Now</a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+    <div class="nav-drawer" id="nav-drawer">
+        <a href="#services" class="nav-drawer-link">Services</a>
+        <a href="#packages" class="nav-drawer-link">Packages</a>
+        <a href="#pricing" class="nav-drawer-link">Pricing</a>
+        <a href="#faq" class="nav-drawer-link">FAQ</a>
+        <a href="#booking" class="btn btn-gold nav-drawer-cta">Book Now</a>
+        <a href="admin.html" class="nav-drawer-link nav-admin">Admin Dashboard</a>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<section class="hero" id="hero">
+    <div class="hero-bg">
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-grid-overlay"></div>
+    </div>
+    <div class="hero-content container">
+        <div class="hero-badge reveal"><span class="badge-dot"></span>Now Accepting Bookings — 2026</div>
+        <h1 class="hero-title reveal">Book <span class="text-gold">Lighthouse Studios</span><br>By Brainvare</h1>
+        <p class="hero-sub reveal">Your Premium Podcast Studio &amp; Production Space. Book podcast studio floor, multi-camera production, product shoots, photoshoots, live events, and full media production services — all in one place.</p>
+        <div class="hero-actions reveal">
+            <a href="#booking" class="btn btn-gold btn-lg">Book Studio Now</a>
+            <a href="#packages" class="btn btn-outline btn-lg">View Packages</a>
+        </div>
+        <div class="hero-stats reveal">
+            <div class="hero-stat"><span class="stat-n">1–5</span><span class="stat-l">Camera Setups</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><span class="stat-n">₹500</span><span class="stat-l">Studio from /hr</span></div>
+            <div class="hero-stat-div"></div>
+            <div class="hero-stat"><span class="stat-n">6</span><span class="stat-l">Core Services</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FEATURES / WHY CHOOSE US
+════════════════════════════════════════ -->
+<section class="section section-features" id="why-us">
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">✨</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">4K Cinematic Production</h3>
+                    <p class="feature-desc">Multi-camera 4K setups with professional cinematic lighting.</p>
+                </div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🎧</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Crystal Clear Audio</h3>
+                    <p class="feature-desc">Soundproof environment with premium microphones.</p>
+                </div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Fast Turnaround</h3>
+                    <p class="feature-desc">On-site editors to help you walk out with finished content.</p>
+                </div>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">🌟</div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Expert Production Crew</h3>
+                    <p class="feature-desc">Dedicated technical assistants to guide your session.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUST BAR
+════════════════════════════════════════ -->
+<div class="trust-bar">
+    <div class="trust-track">
+        <div class="trust-items" id="trust-items"></div>
+        <div class="trust-items" aria-hidden="true" id="trust-items-clone"></div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SERVICES
+════════════════════════════════════════ -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">What We Offer</span>
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-desc">From intimate podcast recordings to large-scale live productions — everything under one premium roof.</p>
+        </div>
+        <div class="services-grid" id="services-grid"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PODCAST PACKAGES
+════════════════════════════════════════ -->
+<section class="section section-alt" id="packages">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Podcast Studio</span>
+            <h2 class="section-title">Choose Your Podcast Setup</h2>
+            <p class="section-desc">From self-recording to broadcast-grade 5-camera productions. Every setup includes professional lighting and soundproofing.</p>
+        </div>
+        <div class="packages-grid" id="packages-grid"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════ -->
+<section class="section" id="how-it-works">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Simple Process</span>
+            <h2 class="section-title">How Booking Works</h2>
+            <p class="section-desc">Four easy steps from selection to confirmation.</p>
+        </div>
+        <div class="steps-grid" id="steps-grid"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PRICING PREVIEW
+════════════════════════════════════════ -->
+<section class="section section-alt" id="pricing">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Transparent Pricing</span>
+            <h2 class="section-title">Studio Pricing</h2>
+            <p class="section-desc">Starting prices for reference. Final pricing calculated based on duration, camera setup, add-ons, and timing.</p>
+        </div>
+        <div class="pricing-grid" id="pricing-grid"></div>
+        <div class="pricing-note reveal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+            Pricing may vary based on duration, camera setup, crew, equipment, editing, live requirements, and custom production needs. After-hours bookings (before 9 AM or after 6 PM) attract an additional surcharge.
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ADD-ONS
+════════════════════════════════════════ -->
+<section class="section" id="addons">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Enhance Your Session</span>
+            <h2 class="section-title">Popular Add-Ons</h2>
+            <p class="section-desc">Customize your booking with equipment, editing, and production add-ons.</p>
+        </div>
+        <div class="addons-grid" id="addons-grid"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TERMS PREVIEW
+════════════════════════════════════════ -->
+<section class="section section-alt" id="terms-preview">
+    <div class="container">
+        <div class="terms-preview-card reveal">
+            <div class="terms-preview-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div class="terms-preview-body">
+                <h3>Booking Terms &amp; Conditions</h3>
+                <p>Before confirming a booking, customers must read and accept the booking terms, cancellation policy, studio usage rules, payment terms, and deliverable conditions.</p>
+                <ul class="terms-highlights">
+                    <li>50% advance payment required to confirm booking</li>
+                    <li>Free cancellation up to 48 hours before the session</li>
+                    <li>Extra time usage beyond the booked slot will be charged</li>
+                    <li>Raw footage and editing are add-ons unless mentioned in package</li>
+                </ul>
+            </div>
+            <a href="#booking" class="btn btn-outline terms-preview-cta">Read Full Terms &amp; Book</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAQ
+════════════════════════════════════════ -->
+<section class="section" id="faq">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Got Questions?</span>
+            <h2 class="section-title">Frequently Asked</h2>
+        </div>
+        <div class="faq-list" id="faq-list"></div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════ -->
+<section class="section cta-section" id="cta-final">
+    <div class="container">
+        <div class="cta-card reveal">
+            <div class="cta-orb-1"></div>
+            <div class="cta-orb-2"></div>
+            <h2 class="cta-title">Ready to create your next episode,<br>campaign, or live production?</h2>
+            <p class="cta-sub">Lighthouse Studios By Brainvare — Premium creative production space in your city.</p>
+            <div class="cta-actions">
+                <a href="#booking" class="btn btn-gold btn-lg">Book Lighthouse Studios Now</a>
+                <a id="wa-cta-btn" href="#" class="btn btn-wa btn-lg" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.528 5.855L0 24l6.335-1.462A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.012-1.374l-.36-.214-3.755.866.948-3.644-.235-.374A9.817 9.817 0 0 1 2.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z"/></svg>
+                    Talk to Our Team on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="logo-name">Lighthouse <span class="logo-accent">Studios</span></span>
+                    <span class="logo-by">By Brainvare</span>
+                </div>
+                <p class="footer-desc">Premium podcast studio, product shoots, live events &amp; full media production. Your vision, our studio.</p>
+                <a id="wa-footer-btn" href="#" class="btn btn-wa-sm" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.528 5.855L0 24l6.335-1.462A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.012-1.374l-.36-.214-3.755.866.948-3.644-.235-.374A9.817 9.817 0 0 1 2.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z"/></svg>
+                    WhatsApp Us
+                </a>
+            </div>
+            <div class="footer-links-col">
+                <h4>Services</h4>
+                <a href="#services">Podcast Studio</a>
+                <a href="#services">Product Photoshoot</a>
+                <a href="#services">Photoshoots</a>
+                <a href="#services">Video Production</a>
+                <a href="#services">Event Media</a>
+                <a href="#services">Live Streaming</a>
+            </div>
+            <div class="footer-links-col">
+                <h4>Booking</h4>
+                <a href="#packages">Packages</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#addons">Add-Ons</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="#booking">Book Now</a>
+            </div>
+            <div class="footer-links-col">
+                <h4>Contact</h4>
+                <a href="mailto:hello@lighthousestudios.in">hello@lighthousestudios.in</a>
+                <a href="tel:+919876543210">+91 98765 43210</a>
+                <span class="footer-addr">Lighthouse Studios, Creative District</span>
+                <a href="admin.html" class="footer-admin-link">Admin Dashboard</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Lighthouse Studios By Brainvare. All rights reserved.</p>
+            <p class="footer-hours">Studio Hours: Mon–Sat 9 AM – 9 PM &nbsp;|&nbsp; After-hours on request</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     BOOKING OVERLAY
+════════════════════════════════════════ -->
+<div class="booking-overlay" id="booking-overlay">
+    <div class="booking-panel" id="booking-panel">
+        <button class="booking-close" id="booking-close" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+
+        <!-- Step indicator -->
+        <div class="booking-steps-bar" id="booking-steps-bar">
+            <div class="bstep active" data-step="1"><span class="bstep-n">1</span><span class="bstep-l">Service &amp; Package</span></div>
+            <div class="bstep-line"></div>
+            <div class="bstep" data-step="2"><span class="bstep-n">2</span><span class="bstep-l">Date &amp; Time</span></div>
+            <div class="bstep-line"></div>
+            <div class="bstep" data-step="3"><span class="bstep-n">3</span><span class="bstep-l">Your Details</span></div>
+            <div class="bstep-line"></div>
+            <div class="bstep" data-step="4"><span class="bstep-n">4</span><span class="bstep-l">Review &amp; Pay</span></div>
+        </div>
+
+        <!-- Step 1: Service & Package (merged) -->
+        <div class="booking-step active" id="bstep-1">
+            <h2 class="bstep-title">Choose Service & Package</h2>
+            <p class="bstep-hint">Select a service, then pick your package.</p>
+            <div class="bservice-grid" id="bservice-grid"></div>
+            <div id="bpackage-area" style="margin-top:16px"></div>
+            <div class="bstep-footer"><button class="btn btn-gold" id="b1-next" disabled>Continue</button></div>
+        </div>
+
+        <!-- Step 2: Date, Time & Add-Ons (merged) -->
+        <div class="booking-step" id="bstep-2">
+            <h2 class="bstep-title">Pick Date, Time &amp; Add-Ons</h2>
+            <div class="bdt-layout">
+                <div class="bcal-wrap">
+                    <div class="bcal-header">
+                        <button class="bcal-nav" id="bcal-prev">&#8249;</button>
+                        <span id="bcal-month-label"></span>
+                        <button class="bcal-nav" id="bcal-next">&#8250;</button>
+                    </div>
+                    <div class="bcal-weekdays">
+                        <span>Su</span><span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span>
+                    </div>
+                    <div class="bcal-days" id="bcal-days"></div>
+                </div>
+                <div class="btime-wrap">
+                    <div class="btime-section">
+                        <label class="btime-label">Start Time</label>
+                        <div class="btime-slots" id="btime-slots"></div>
+                    </div>
+                    <div class="btime-section">
+                        <label class="btime-label">Duration</label>
+                        <div class="bdur-opts" id="bdur-opts"></div>
+                    </div>
+                    <div class="btime-section" id="btime-summary-wrap" style="display:none">
+                        <label class="btime-label">Session Summary</label>
+                        <div class="btime-summary" id="btime-summary"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Inline Add-Ons -->
+            <div style="margin-top:24px">
+                <h3 style="font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:6px">Add-Ons <span style="font-weight:400;color:var(--muted);font-size:0.82rem">(optional)</span></h3>
+                <div class="baddon-grid" id="baddon-grid"></div>
+            </div>
+            <div class="bstep-footer">
+                <button class="btn btn-outline" id="b2-back">Back</button>
+                <button class="btn btn-gold" id="b2-next" disabled>Continue</button>
+            </div>
+        </div>
+
+        <!-- Step 3: Customer Details (simplified) -->
+        <div class="booking-step" id="bstep-3">
+            <h2 class="bstep-title">Your Details</h2>
+            <form class="bform" id="bform" novalidate>
+                <div class="bform-grid">
+                    <div class="bform-group">
+                        <label>Full Name <span class="req">*</span></label>
+                        <input type="text" id="bf-name" placeholder="Your full name" required autocomplete="name">
+                    </div>
+                    <div class="bform-group">
+                        <label>Phone Number <span class="req">*</span></label>
+                        <input type="tel" id="bf-phone" placeholder="+91 98765 43210" required autocomplete="tel">
+                    </div>
+                    <div class="bform-group">
+                        <label>Email Address <span class="req">*</span></label>
+                        <input type="email" id="bf-email" placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                    <div class="bform-group">
+                        <label>WhatsApp <span class="opt">(if different)</span></label>
+                        <input type="tel" id="bf-whatsapp" placeholder="Same as phone? Leave blank">
+                    </div>
+                    <div class="bform-group">
+                        <label>Company / Brand</label>
+                        <input type="text" id="bf-company" placeholder="Optional" autocomplete="organization">
+                    </div>
+                    <div class="bform-group">
+                        <label>GST Number <span class="opt">(optional)</span></label>
+                        <input type="text" id="bf-gst" placeholder="For invoice">
+                    </div>
+                    <div class="bform-group bform-full">
+                        <label>Special Requirements</label>
+                        <textarea id="bf-notes" rows="2" placeholder="Any special needs, reference links..."></textarea>
+                    </div>
+                    <div class="bform-group bform-full" id="bpodcast-extra" style="display:none">
+                        <div class="bform-sub-grid">
+                            <div class="bform-group">
+                                <label>Podcast Type</label>
+                                <select id="bf-podcast-type">
+                                    <option value="">Select type</option>
+                                    <option>Interview / Conversation</option>
+                                    <option>Solo / Monologue</option>
+                                    <option>Panel Discussion</option>
+                                    <option>Educational / Tutorial</option>
+                                    <option>Live Show</option>
+                                </select>
+                            </div>
+                            <div class="bform-group">
+                                <label>Number of Speakers</label>
+                                <input type="number" id="bf-speakers" min="1" max="10" placeholder="e.g. 2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="bstep-footer">
+                <button class="btn btn-outline" id="b3-back">Back</button>
+                <button class="btn btn-gold" id="b3-next">Review Booking</button>
+            </div>
+        </div>
+
+        <!-- Step 4: Review & Pay -->
+        <div class="booking-step" id="bstep-4">
+            <h2 class="bstep-title">Review &amp; Pay</h2>
+            <div class="bsummary" id="bsummary"></div>
+            <div id="bsummary-coupon" style="margin-bottom:.75rem"></div>
+            <!-- Partial Payment Option -->
+            <div class="bpayment-choice" id="bpayment-choice" style="margin-bottom:16px">
+                <label class="btime-label" style="margin-bottom:10px">Payment Option</label>
+                <div class="bpay-options" id="bpay-options"></div>
+            </div>
+            <div class="bterms-box">
+                <div class="bterms-scroll" id="bterms-scroll"></div>
+                <label class="bterms-check">
+                    <input type="checkbox" id="bterms-agree">
+                    <span>I agree to the booking terms, cancellation policy, and payment conditions.</span>
+                </label>
+            </div>
+            <div class="bstep-footer">
+                <button class="btn btn-outline" id="b4-back">Back</button>
+                <button class="btn btn-gold" id="b4-confirm" disabled>Submit Booking Request</button>
+            </div>
+        </div>
+
+        <!-- Success -->
+        <div class="booking-step" id="bstep-success" style="display:none">
+            <div class="bsuccess">
+                <div class="bsuccess-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="40" height="40"><path d="M20 6L9 17l-5-5"/></svg>
+                </div>
+                <h3>Booking Request Received!</h3>
+                <p>Our team will verify availability and contact you shortly. You'll receive a confirmation message on your WhatsApp/email.</p>
+                <div class="bsuccess-details" id="bsuccess-details"></div>
+                <div class="bsuccess-status">
+                    <span class="status-badge new-request">New Request</span>
+                </div>
+                <div id="bsuccess-qr" style="display:none;margin:1.25rem 0;text-align:center">
+                    <div id="bsuccess-qr-canvas" style="display:inline-block;background:white;padding:10px;border-radius:8px"></div>
+                    <p style="font-size:.78rem;color:var(--muted,#7A8494);margin-top:.5rem">Scan to view your receipt</p>
+                    <a id="bsuccess-receipt-link" href="#" target="_blank" style="font-size:.78rem;color:var(--gold,#D6A84F);display:block;margin-top:.3rem">View Full Receipt</a>
+                </div>
+                <div class="bsuccess-actions">
+                    <a id="wa-success-btn" href="#" class="btn btn-wa" target="_blank" rel="noopener">Chat on WhatsApp</a>
+                    <button class="btn btn-outline" id="bnew-booking">New Booking</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live price ticker -->
+        <div class="bprice-ticker" id="bprice-ticker" style="display:none">
+            <div class="bprice-ticker-inner">
+                <span class="bprice-ticker-label">Estimated Total</span>
+                <span class="bprice-ticker-amount" id="bprice-amount">₹0</span>
+                <span class="bprice-ticker-adv" id="bprice-adv"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FLOATING WHATSAPP BUTTON
+════════════════════════════════════════ -->
+<a id="wa-float" href="#" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.528 5.855L0 24l6.335-1.462A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.815 9.815 0 0 1-5.012-1.374l-.36-.214-3.755.866.948-3.644-.235-.374A9.817 9.817 0 0 1 2.182 12C2.182 6.577 6.577 2.182 12 2.182S21.818 6.577 21.818 12 17.423 21.818 12 21.818z"/></svg>
+    <span class="wa-float-label">WhatsApp</span>
+</a>
+
+<!-- ═══════════════════════════════════════
+     STICKY MOBILE BOOK NOW BUTTON
+════════════════════════════════════════ -->
+<div class="sticky-book-bar" id="sticky-book-bar">
+    <a href="#booking" class="btn btn-gold btn-block">Book Studio Now</a>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+    <script>
+        const Auth = {
+            user: JSON.parse(localStorage.getItem('lhs_user')),
+            
+            async updateUI() {
+                const container = document.getElementById('user-button');
+                container.innerHTML = '';
+                if (this.user) {
+                    const btn = document.createElement('button');
+                    btn.innerText = 'Log Out';
+                    btn.className = 'nav-link';
+                    btn.onclick = () => this.logout();
+                    container.appendChild(btn);
+                } else {
+                    // Initialize Google Button
+                    google.accounts.id.initialize({
+                        client_id: "REPLACE_WITH_YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com",
+                        callback: (res) => this.handleGoogleLogin(res)
+                    });
+                    google.accounts.id.renderButton(
+                        container,
+                        { theme: "outline", size: "medium", shape: "pill" }
+                    );
+                }
+            },
+
+            async handleGoogleLogin(response) {
+                const res = await fetch('/api/auth/google', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token: response.credential })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    this.user = data.user;
+                    localStorage.setItem('lhs_user', JSON.stringify(this.user));
+                    this.updateUI();
+                    alert(`Welcome back, ${this.user.name}!`);
+                } else {
+                    alert("Google login failed.");
+                }
+            },
+
+            logout() {
+                this.user = null;
+                localStorage.removeItem('lhs_user');
+                this.updateUI();
+            }
+        };
+
+        window.addEventListener('load', () => Auth.updateUI());
+    </script>
+</body>
+</html>

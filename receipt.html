@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Booking Receipt — Lighthouse Studios</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    :root {
+      --bg: #0B0F14; --card: #161B22; --card2: #1C2330;
+      --border: #2A3140; --gold: #D6A84F; --gold-bg: rgba(214,168,79,.1);
+      --text: #F0F2F5; --muted: #7A8494; --success: #4CAF87;
+      --success-bg: rgba(76,175,135,.1); --danger: #E05252;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius: 10px; --radius-sm: 6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: .9375rem; line-height: 1.6; min-height: 100vh; padding: 1.5rem 1rem 3rem; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .receipt-wrap { max-width: 600px; margin: 0 auto; }
+    .receipt-header { text-align: center; padding: 2rem 0 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem; }
+    .receipt-logo { font-family: var(--font-head); font-size: 1.4rem; font-weight: 700; color: var(--gold); display: flex; align-items: center; justify-content: center; gap: .5rem; margin-bottom: .4rem; }
+    .receipt-logo-icon { font-size: 1.8rem; }
+    .receipt-tagline { color: var(--muted); font-size: .85rem; }
+    .receipt-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-top: 1rem; }
+    .receipt-id { font-size: .8rem; color: var(--muted); font-family: 'Courier New', monospace; margin-top: .2rem; }
+
+    .status-banner {
+      border-radius: var(--radius);
+      padding: .85rem 1rem;
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: .75rem;
+      font-weight: 600; font-size: .9rem;
+    }
+    .status-banner-icon { font-size: 1.4rem; }
+    .status-confirmed { background: var(--success-bg); border: 1px solid rgba(76,175,135,.25); color: var(--success); }
+    .status-pending   { background: rgba(230,168,23,.08); border: 1px solid rgba(230,168,23,.25); color: #E6A817; }
+    .status-cancelled { background: rgba(224,82,82,.08); border: 1px solid rgba(224,82,82,.25); color: var(--danger); }
+
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1rem; overflow: hidden; }
+    .card-header { padding: .85rem 1.1rem; border-bottom: 1px solid var(--border); background: var(--card2); }
+    .card-title { font-family: var(--font-head); font-size: .9rem; font-weight: 700; }
+    .card-body { padding: 1rem 1.1rem; }
+
+    .info-row { display: flex; justify-content: space-between; align-items: flex-start; gap: .5rem; padding: .4rem 0; border-bottom: 1px solid var(--border); font-size: .875rem; }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { color: var(--muted); flex-shrink: 0; }
+    .info-value { font-weight: 600; text-align: right; }
+
+    .total-row { display: flex; justify-content: space-between; align-items: center; padding: .6rem 0; margin-top: .25rem; border-top: 1px solid var(--border); }
+    .total-label { font-weight: 700; }
+    .total-value { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--gold); }
+
+    .qr-section { text-align: center; padding: 1.5rem; }
+    #receipt-qr { display: inline-block; background: white; padding: 10px; border-radius: 8px; margin-bottom: .75rem; }
+    .qr-label { font-size: .8rem; color: var(--muted); }
+
+    .addon-tag { display: inline-flex; align-items: center; gap: .3rem; background: var(--card2); border: 1px solid var(--border); border-radius: 20px; padding: .2em .6em; font-size: .78rem; margin: .15rem; }
+
+    .wa-btn {
+      display: flex; align-items: center; justify-content: center; gap: .6rem;
+      background: rgba(37,211,102,.1); border: 1px solid rgba(37,211,102,.25);
+      color: #25D366; border-radius: var(--radius); padding: .85rem;
+      font-weight: 600; font-size: .9rem; text-decoration: none;
+      transition: background .2s;
+      margin-bottom: .75rem;
+    }
+    .wa-btn:hover { background: rgba(37,211,102,.18); }
+    .wa-btn svg { width: 20px; height: 20px; }
+
+    .print-btn {
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      color: var(--text); border-radius: var(--radius); padding: .75rem;
+      font-weight: 600; font-size: .875rem; cursor: pointer; width: 100%;
+      transition: background .2s; margin-bottom: .75rem;
+    }
+    .print-btn:hover { background: rgba(255,255,255,.1); }
+
+    .terms-section { font-size: .78rem; color: var(--muted); line-height: 1.65; }
+    .terms-title { font-weight: 600; margin-bottom: .5rem; }
+
+    .receipt-footer { text-align: center; padding: 2rem 0 .5rem; color: var(--muted); font-size: .8rem; }
+
+    .loading { text-align: center; padding: 4rem 1rem; color: var(--muted); }
+    .loading-icon { font-size: 2.5rem; margin-bottom: .75rem; animation: spin 1.5s linear infinite; display: inline-block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .not-found { text-align: center; padding: 4rem 1rem; }
+    .not-found-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .not-found-title { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; margin-bottom: .5rem; }
+
+    @media print {
+      body { background: white; color: black; }
+      .card { border: 1px solid #ddd; }
+      .wa-btn, .print-btn, .qr-section { display: none !important; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 1rem .75rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt-wrap" id="receipt-wrap">
+    <div class="loading">
+      <div class="loading-icon">⏳</div>
+      <p>Loading your booking…</p>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+  (function() {
+    const params = new URLSearchParams(location.search);
+    const bookingId = params.get('id') || params.get('booking');
+    const wrap = document.getElementById('receipt-wrap');
+
+    if (!bookingId) {
+      wrap.innerHTML = notFound('No booking ID provided.');
+      return;
+    }
+
+    // Try to find booking
+    const bookings = DB.getBookings ? DB.getBookings() : [];
+    const b = bookings.find(b => b.id === bookingId || b.bookingId === bookingId);
+
+    if (!b) {
+      wrap.innerHTML = notFound(`Booking "${bookingId}" not found.`);
+      return;
+    }
+
+    render(b);
+
+    function fmtDate(d) {
+      if (!d) return '—';
+      return new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+    function fmtTime(h) {
+      if (h == null) return '—';
+      const hh = Math.floor(h), mm = Math.round((h % 1) * 60);
+      const ampm = hh >= 12 ? 'PM' : 'AM';
+      return `${hh%12||12}:${String(mm).padStart(2,'0')} ${ampm}`;
+    }
+    function fmt(n) { return '₹' + Number(n||0).toLocaleString('en-IN'); }
+
+    function statusBanner(b) {
+      const confirmed = ['confirmed','advance-paid','fully-paid','in-session','completed'].includes(b.status);
+      const cancelled = b.status === 'cancelled';
+      if (cancelled) return `<div class="status-banner status-cancelled"><span class="status-banner-icon">❌</span><div><div>Booking Cancelled</div><div style="font-weight:400;font-size:.82rem;margin-top:.1rem">This booking has been cancelled. Please contact us for assistance.</div></div></div>`;
+      if (confirmed) return `<div class="status-banner status-confirmed"><span class="status-banner-icon">✅</span><div><div>Booking Confirmed</div><div style="font-weight:400;font-size:.82rem;margin-top:.1rem">Your session is confirmed. See you at the studio!</div></div></div>`;
+      return `<div class="status-banner status-pending"><span class="status-banner-icon">⏳</span><div><div>Booking Pending Confirmation</div><div style="font-weight:400;font-size:.82rem;margin-top:.1rem">We're reviewing your request and will confirm shortly via WhatsApp.</div></div></div>`;
+    }
+
+    function render(b) {
+      const cfg = STUDIO_CONFIG || {};
+      const waPhone = (cfg.whatsappNumber || cfg.whatsapp || '').replace(/\D/g,'');
+      const addons = b.selectedAddons || [];
+
+      const html = `
+      <div class="receipt-header">
+        <div class="receipt-logo"><span class="receipt-logo-icon">⬡</span>${cfg.brandName||'Lighthouse Studios'}</div>
+        <div class="receipt-tagline">${cfg.address||''}</div>
+        <div class="receipt-title">Booking Receipt</div>
+        <div class="receipt-id">${b.bookingId || b.id}</div>
+      </div>
+
+      ${statusBanner(b)}
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Customer Details</div></div>
+        <div class="card-body">
+          <div class="info-row"><span class="info-label">Name</span><span class="info-value">${b.customerName||'—'}</span></div>
+          <div class="info-row"><span class="info-label">Phone</span><span class="info-value">${b.customerPhone||'—'}</span></div>
+          ${b.customerEmail ? `<div class="info-row"><span class="info-label">Email</span><span class="info-value">${b.customerEmail}</span></div>` : ''}
+          ${b.companyName ? `<div class="info-row"><span class="info-label">Company</span><span class="info-value">${b.companyName}</span></div>` : ''}
+          ${b.guestCount ? `<div class="info-row"><span class="info-label">Guests</span><span class="info-value">${b.guestCount}</span></div>` : ''}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Session Details</div></div>
+        <div class="card-body">
+          <div class="info-row"><span class="info-label">Service</span><span class="info-value">${b.serviceName||b.serviceId||'—'}</span></div>
+          <div class="info-row"><span class="info-label">Package</span><span class="info-value">${b.packageName||b.packageId||'—'}</span></div>
+          <div class="info-row"><span class="info-label">Date</span><span class="info-value">${fmtDate(b.date)}</span></div>
+          <div class="info-row"><span class="info-label">Time</span><span class="info-value">${fmtTime(b.startHour)} – ${fmtTime(b.endHour)}</span></div>
+          <div class="info-row"><span class="info-label">Duration</span><span class="info-value">${b.startHour != null && b.endHour != null ? (b.endHour - b.startHour) + ' hours' : '—'}</span></div>
+          <div class="info-row"><span class="info-label">Status</span><span class="info-value">${(b.status||'').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</span></div>
+          ${addons.length ? `<div class="info-row" style="align-items:flex-start"><span class="info-label">Add-Ons</span><div style="display:flex;flex-wrap:wrap;justify-content:flex-end">${addons.map(a=>`<span class="addon-tag">${a.icon||''} ${a.name}</span>`).join('')}</div></div>` : ''}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Payment Summary</div></div>
+        <div class="card-body">
+          <div class="info-row"><span class="info-label">Base Amount</span><span class="info-value">${fmt(b.baseAmount)}</span></div>
+          ${b.tariffSurcharge ? `<div class="info-row"><span class="info-label">Surcharge</span><span class="info-value">${fmt(b.tariffSurcharge)}</span></div>` : ''}
+          ${b.addonTotal ? `<div class="info-row"><span class="info-label">Add-Ons Total</span><span class="info-value">${fmt(b.addonTotal)}</span></div>` : ''}
+          ${b.couponDiscount ? `<div class="info-row"><span class="info-label">Coupon (${b.couponCode})</span><span class="info-value" style="color:#4CAF87">-${fmt(b.couponDiscount)}</span></div>` : ''}
+          ${b.customDiscount ? `<div class="info-row"><span class="info-label">Discount</span><span class="info-value" style="color:#4CAF87">-${fmt(b.customDiscount)}</span></div>` : ''}
+          ${b.gstAmount ? `<div class="info-row"><span class="info-label">GST (18%)</span><span class="info-value">${fmt(b.gstAmount)}</span></div>` : ''}
+          <div class="total-row"><span class="total-label">Total Amount</span><span class="total-value">${fmt(b.totalAmount)}</span></div>
+          <div class="info-row" style="margin-top:.5rem"><span class="info-label">Advance Paid / Due</span><span class="info-value">${fmt(b.advanceAmount)}</span></div>
+          <div class="info-row"><span class="info-label">Balance Due</span><span class="info-value">${fmt((b.totalAmount||0)-(b.advanceAmount||0))}</span></div>
+          <div class="info-row"><span class="info-label">Payment Status</span><span class="info-value">${(b.paymentStatus||'').replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</span></div>
+          ${b.paymentRef ? `<div class="info-row"><span class="info-label">Payment Ref</span><span class="info-value">${b.paymentRef}</span></div>` : ''}
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">QR Code</div></div>
+        <div class="qr-section">
+          <div id="receipt-qr"></div>
+          <div class="qr-label">Scan to view this receipt</div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/${waPhone}?text=${encodeURIComponent('Hi, I have a query regarding booking ' + (b.bookingId||b.id))}" target="_blank" class="wa-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Contact Us on WhatsApp
+      </a>
+
+      <button class="print-btn" onclick="window.print()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Print / Save PDF
+      </button>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">Important Information</div></div>
+        <div class="card-body terms-section">
+          <div class="terms-title">Please note:</div>
+          <p>• Sessions start and end at booked time regardless of late arrival.</p>
+          <p>• Arrive on time. Extra usage will be charged at applicable hourly rates.</p>
+          <p>• Bring all references, scripts, and assets ready before your session.</p>
+          <p>• ${cfg.cancellationPolicy ? cfg.cancellationPolicy.split('\n')[0] : 'Free cancellation up to 48 hours before your session.'}</p>
+          <p style="margin-top:.75rem">For queries, contact us on WhatsApp or email <strong>${cfg.email||'hello@lighthousestudios.in'}</strong>.</p>
+        </div>
+      </div>
+
+      <div class="receipt-footer">
+        <p>${cfg.brandName||'Lighthouse Studios By Brainvare'}</p>
+        <p style="margin-top:.25rem">${cfg.address||''}</p>
+        <p style="margin-top:.5rem;font-size:.72rem">Generated on ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'})}</p>
+      </div>`;
+
+      wrap.innerHTML = html;
+
+      // Render QR
+      const qrEl = document.getElementById('receipt-qr');
+      if (qrEl && window.QRCode) {
+        new QRCode(qrEl, { text: location.href, width: 140, height: 140, colorDark: '#0B0F14', colorLight: '#ffffff' });
+      }
+    }
+
+    function notFound(msg) {
+      return `<div class="not-found">
+        <div class="not-found-icon">🔍</div>
+        <div class="not-found-title">Booking Not Found</div>
+        <p style="color:var(--muted);margin-bottom:1.5rem">${msg}</p>
+        <p style="color:var(--muted);font-size:.85rem">If you believe this is an error, please contact us via WhatsApp with your booking reference.</p>
+      </div>`;
+    }
+  })();
+  </script>
+</body>
+</html>
