@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @theme {
   --font-head: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
+
+  --animate-marquee: marquee 30s linear infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -36,48 +36,71 @@
   --shadow-lg: 0 20px 60px rgba(0,0,0,0.7);
   --glow: 0 0 50px rgba(234, 179, 8, 0.15);
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --font-head: 'Space Grotesk', sans-serif;
-  --font-body: 'Inter', sans-serif;
   --nav-h: 72px;
 }
 
-@layer base {
-  body {
-    @apply bg-[var(--bg)] text-[var(--text)] antialiased overflow-x-hidden;
-    font-family: var(--font-body);
-    line-height: 1.6;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold;
-    font-family: var(--font-head);
-  }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-@layer components {
-  .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-[var(--radius-sm)] font-semibold transition-all duration-300;
-    background: var(--gold-grad);
-    color: #05070A;
-    box-shadow: 0 4px 20px rgba(234, 179, 8, 0.3);
-  }
-  
-  .btn-gold:hover {
-    @apply -translate-y-0.5;
-    background: var(--gold-grad-h);
-    box-shadow: 0 8px 32px rgba(234, 179, 8, 0.4);
-  }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  font-weight: 700;
+}
 
-  .premium-card {
-    @apply bg-[var(--card)] border border-[var(--border)] rounded-[var(--radius-lg)] p-8 transition-all duration-300 relative overflow-hidden;
-  }
+.section {
+  padding: 96px 0;
+}
 
-  .premium-card:hover {
-    @apply -translate-y-2 border-[rgba(234,179,8,0.4)];
-    box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(234, 179, 8, 0.05);
-  }
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--gold-grad);
+  color: #05070A;
+  box-shadow: 0 4px 20px rgba(234, 179, 8, 0.3);
+  cursor: pointer;
+  border: none;
+}
 
-  .animate-marquee {
-    animation: marquee 30s linear infinite;
-  }
+.btn-gold:hover {
+  background: var(--gold-grad-h);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(234, 179, 8, 0.4);
+}
+
+.premium-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(234, 179, 8, 0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 30px rgba(234, 179, 8, 0.05);
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.font-head {
+  font-family: var(--font-head);
 }
